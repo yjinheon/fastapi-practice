@@ -6,7 +6,7 @@ from src.database.models import Users
 
 UserInSchema = pydantic_model_creator(Users,
                                       name="User",
-                                      exclude_readonly=True)
+                                      exclude_readonly=True) # exclude_readonly=True: 읽기 전용 필드 제외
 
 UserOutSchema = pydantic_model_creator(Users,
                                        name="UserOut",
