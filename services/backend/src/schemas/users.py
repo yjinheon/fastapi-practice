@@ -12,6 +12,7 @@ UserOutSchema = pydantic_model_creator(Users,
                                        name="UserOut",
                                        exclude_readonly=True)
 
+# create pydantic model from tortoise model
 UsersDataBaseSchema = pydantic_model_creator(Users,
                                              name="User",
                                              exclude=["created_at", "modified_at"])
