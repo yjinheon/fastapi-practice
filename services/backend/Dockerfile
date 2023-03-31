@@ -6,12 +6,12 @@ WORKDIR /app
 ENV PATH="${PATH}:/root/.local/bin"
 ENV PYTHONPATH=.
 
-# for migrations
-COPY migrations .
-COPY pyproject.toml .
-
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
+## for migrations
+COPY migrations .
+COPY pyproject.toml .
 
 COPY src/ .

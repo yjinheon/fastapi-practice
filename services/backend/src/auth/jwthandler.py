@@ -72,6 +72,7 @@ def create_access_token(data:dict,
     return encoded_jwt
 
 
+# get current user
 async def get_current_user(token: str = Depends(security)):
     """
     decode the token and validate the user
@@ -79,7 +80,7 @@ async def get_current_user(token: str = Depends(security)):
     :return:
     """
     credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
+        status_code=401,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
@@ -92,7 +93,9 @@ async def get_current_user(token: str = Depends(security)):
     except JWTError:
         raise credentials_exception
     try:
-        user = await UserOutSchema.from_queryset_single(Users.get(username=token_data.username))
+        user = await UserOutSchema.from_queryset_single(
+            Users.get(username=token_data.username)
+        )
     except DoesNotExist:
         raise credentials_exception
     return user

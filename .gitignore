@@ -5,7 +5,7 @@ __pycache__/
 
 pkg
 
-
+.idea
 # C extensions
 *.so
 
