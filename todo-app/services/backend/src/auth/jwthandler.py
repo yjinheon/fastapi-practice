@@ -15,6 +15,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+
 class OAuth2PasswordBearerWithCookie(OAuth2):
     """
     a class that inherits from OAuth2
@@ -22,17 +23,17 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
     - read the cookie sent from request
     - ensures that the cookie is a bearer token
     """
+
     def __init__(
-            self,
-            token_url: str,
-            scheme_name: str=None ,
-            scopes: dict=None,
-            auto_error: bool=True
+        self,
+        token_url: str,
+        scheme_name: str = None,
+        scopes: dict = None,
+        auto_error: bool = True,
     ):
         if not scopes:
             scopes = {}
-        flows = OAuthFlowsModel(password={"tokenUrl": token_url,
-                                            "scopes": scopes})
+        flows = OAuthFlowsModel(password={"tokenUrl": token_url, "scopes": scopes})
         super().__init__(flows=flows, scheme_name=scheme_name, auto_error=auto_error)
 
     async def __call__(self, request):
@@ -49,10 +50,11 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
             else:
                 return None
 
+
 security = OAuth2PasswordBearerWithCookie(token_url="/login")
 
-def create_access_token(data:dict,
-                        expires_delta: Optional[timedelta] = None):
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     """
     create a jwt token from the username
     :param data:
@@ -64,7 +66,7 @@ def create_access_token(data:dict,
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15) # default expire time
+        expire = datetime.utcnow() + timedelta(minutes=15)  # default expire time
 
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

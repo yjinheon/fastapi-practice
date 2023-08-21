@@ -2,6 +2,7 @@
   <div id="app">
     <router-view/>
   </div>
+<!-- vue instance의 유효범위 -->
 </template>
 
 <style>
