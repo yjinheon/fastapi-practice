@@ -5,10 +5,10 @@ from typing import Optional
 from enum import Enum
 
 router = APIRouter(
-        prefix="/blog",
-        tags=["blog"],
-        responses={404: {"description": "Not found"}},
-        )
+    prefix="/blog",
+    tags=["blog"],
+    responses={404: {"description": "Not found"}},
+)
 
 
 class BlogType(str, Enum):
@@ -47,11 +47,12 @@ def get_blog(id: int, response: Response):
 
 
 @router.get("/{id}/comments/{comment_id}", tags=["blog", "comment"])
-def get_comment(id: int, comment_id: int, valid: bool = True, username: Optional[str] = None):
+def get_comment(
+    id: int, comment_id: int, valid: bool = True, username: Optional[str] = None
+):
     """
     Simulate a blog comment : Descriotion 대신 사용할 수 있다.
     """
     return {
         "Message": f"blog id is {id} and comment id is {comment_id} and valid is {valid} and username is {username}"
     }
-
