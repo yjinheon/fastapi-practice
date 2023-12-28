@@ -110,3 +110,23 @@ router = APIRouter(prefix="/items", tags=["items"])
 #### Refactoring
 
 #### Adding a second router
+
+### Parameters
+
+#### Request body
+
+#### Path parameters
+
+#### Query parameters
+
+#### Parameter metadata
+
+#### Validators
+
+#### Multiple values
+
+#### Number validations
+
+#### Complex subtypes
+
+
