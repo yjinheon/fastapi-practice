@@ -1,16 +1,23 @@
 from fastapi import FastAPI
 from router import blog_get
 from router import blog_post
+from router import blog_post
 from typing import Optional
+
+# logging
+import logging
+
+# logger = logging.getLogger(__name__)
+
 
 app = FastAPI()
 app.include_router(blog_get.router)
-app.include_router(blog_post.router)
 
 
 @app.get("/")
 def index():
-    return {"Message": "Hello World"}
+    #    logger.info(f"request / endpoint!")
+    return {"Message": "Hello FastAPI"}
 
 
 @app.get("/items/{item_id}")
